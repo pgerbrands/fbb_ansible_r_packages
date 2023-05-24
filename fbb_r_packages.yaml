@@ -1,0 +1,15 @@
+- name: Making sure R is installed
+apt: pkg=r-base state=installed
+
+- name: adding a few R packages
+command: /usr/bin/Rscript --slave --no-save --no-restore-history -e "if (! ('{{item}}' %in% installed.packages()[,'Package'])) install.packages(pkgs={{item}}, repos=c('http://www.freestatistics.org/cran/'))"
+with_items:
+- ggplot2
+- tidyverse
+- dplyr
+- magrittr
+- dplyr
+- arrow
+- haven
+- gmm
+- pdynmc
